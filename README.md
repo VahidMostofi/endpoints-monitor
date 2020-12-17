@@ -3,6 +3,10 @@ Monitors different endpoints using nginx and stores information about request re
 
 ![architecture](https://raw.githubusercontent.com/VahidMostofi/endpoints-monitor/dev-v0/Monitoring-Ednpoints.png)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/VahidMostofi/endpoints-monitor/dev-v0/Monitoring-Ednpoints.png" />
+</p>
+
 - ### [nginx-gateway](##nginx-gateway)
 - ### [telegraf-agent](##telegraf-agent)
 - ### dashboard (TODO)
