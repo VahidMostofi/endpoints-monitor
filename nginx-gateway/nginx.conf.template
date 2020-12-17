@@ -1,0 +1,35 @@
+user  nginx;
+worker_processes  1; # is common to use 1 per core. This is the number of workers to run on the server
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+events {
+    worker_connections  4096;
+}
+
+http{
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    log_format influxdb 'request_info,provider=nginx duration=$request_time,status=$status,uri="$request_uri",method="$request_method",ust=$upstream_response_time,usc=$upstream_connect_time $time_iso8601';
+
+    # access_log  /var/log/nginx/access.log  telegraf;
+    access_log  syslog:server=${TELEGRAF_SYSLOG_SERVER},nohostname influxdb;
+    error_log   /var/log/nginx/error.log;
+    
+    server { 
+        listen ${PORT};
+        location /nginx_status {
+            stub_status on;
+
+            access_log off;
+            allow all;
+        }
+
+        location / {
+            proxy_pass     ${PROXY_PASS_URL};
+        }
+    }
+}
