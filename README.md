@@ -6,9 +6,14 @@ Monitors different endpoints using nginx and stores information about request re
 </p>
 
 [nginx-gateway](##nginx-gateway)
+
 [telegraf-agent](##telegraf-agent)
+
 dashboard (TODO)
+
 [example](##example)
+
+...snip...    
 
 ## nginx-gateway
 
