@@ -6,7 +6,9 @@ Monitors different endpoints using nginx and stores information about request re
 </p>
 
 [nginx-gateway](##nginx-gateway)
+<br/><br/>
 [telegraf-agent](##telegraf-agent)
+<br/><br/>
 [example](##example)
 
 ## nginx-gateway
