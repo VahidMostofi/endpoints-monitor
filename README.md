@@ -1,6 +1,8 @@
 # Endpoints Monitoring System
 Monitors different endpoints using nginx and stores information about request response time in influxdb. The stored information would be available using an API and a dashboard.
 
+![architecture](https://raw.githubusercontent.com/VahidMostofi/endpoints-monitor/dev-v0/Monitoring-Ednpoints.png)
+
 - ### [nginx-gateway](##nginx-gateway)
 - ### [telegraf-agent](##telegraf-agent)
 - ### dashboard (TODO)
