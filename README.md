@@ -24,6 +24,8 @@ access_log  syslog:server=${TELEGRAF_SYSLOG_SERVER},nohostname influxdb;
 
 replace ```TELEGRAF_SYSLOG_SERVER``` with appropriate url.
 
+refer to ```deployment/k8s```.
+
 
 ## nginx-gateway
 
