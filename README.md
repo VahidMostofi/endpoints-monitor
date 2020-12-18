@@ -5,11 +5,25 @@ Monitors different endpoints using nginx and stores information about request re
   <img src="https://raw.githubusercontent.com/VahidMostofi/endpoints-monitor/dev-v0/Monitoring-Ednpoints.png" />
 </p>
 
+[How to use](##how-to-use)
+<br/><br/>
 [nginx-gateway](##nginx-gateway)
 <br/><br/>
 [telegraf-agent](##telegraf-agent)
 <br/><br/>
 [example](##example)
+
+## How to use?
+You definetly don't need all of these stuff as you may already have an nginx running as your API gateway. Just use the the telegraf agent wiht appropriate environemtn variables as a side-car in the same pod of nginx (assuming you are using kubernetes). It will also be scalable too. Then add these 2 lines to your nginx config file and enjoy your metrics on you influxdb (or anyother telegraf output, but the default config on this Docker image is for influxdb).
+
+```
+log_format influxdb 'request_info,provider=nginx duration=$request_time,status=$status,uri="$request_uri",method="$request_method",ust=$upstream_response_time,usc=$upstream_connect_time $time_iso8601';
+
+access_log  syslog:server=${TELEGRAF_SYSLOG_SERVER},nohostname influxdb;
+```
+
+replace ```TELEGRAF_SYSLOG_SERVER``` with appropriate url.
+
 
 ## nginx-gateway
 
