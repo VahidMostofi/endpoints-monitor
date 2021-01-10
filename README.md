@@ -32,13 +32,13 @@ Specify the port which nginx listen to for incoming traffic using environment va
 This is what [syslog Parser](###syslog-parser) at telegraf-agent gets:
 
 ```
-<190>Dec 16 04:21:13 nginx: request_info,provider=nginx duration=0.004,status=404,uri=/auth/login,method=GET,ust=0.003,usc=0.003 2020-12-16T23:27:37+00:00
+<190>Dec 16 04:21:13 nginx: request_info,provider=nginx,uri=/auth/login,method=GET duration=0.004,status=404,ust=0.003,usc=0.003 2020-12-16T23:27:37+00:00
 ```
 
 and this is what it returns: (a valid [InfluxDB line protocol](https://docs.influxdata.com/influxdb/v2.0/reference/syntax/line-protocol/) example)
 
 ```
-request_info,provider=nginx duration=0.004,status=404,uri=/auth/login,method=GET,ust=0.003,usc=0.003 1608161257000000000
+request_info,provider=nginx,uri=/auth/login,method=GET duration=0.004,status=404,ust=0.003,usc=0.003 1608161257000000000
 ```
 
 
