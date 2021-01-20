@@ -23,7 +23,11 @@ func report(str string) string {
 		fmt.Errorf("error")
 	}
 	parts[lastIdx] = strconv.FormatInt(t.UnixNano(), 10)
-	return strings.Join(parts, " ")
+	res := strings.Join(parts, " ")
+	if len(res) < 22 {
+		return ""
+	}
+	return res
 }
 
 func main() {
@@ -51,6 +55,7 @@ func main() {
 		n, _, err := ser.ReadFromUDP(p)
 		last = append(last, p[:n]...)
 		for {
+
 			matched, err := regexp.Match(pattern, last)
 			if err != nil {
 				fmt.Printf("error %v\n", err)
@@ -60,10 +65,16 @@ func main() {
 			}
 			parts := re.Split(string(last), -1)
 			for _, part := range parts[:len(parts)-1] {
-				fmt.Println(report(part))
+				ss := report(part)
+				if len(ss) > 0 {
+					fmt.Println(ss)
+				}
 			}
 			if len(parts[len(parts)-1]) == len(parts[0]) {
-				fmt.Println(report(string(parts[len(parts)-1])))
+				ss := report(string(parts[len(parts)-1]))
+				if len(ss) > 0 {
+					fmt.Println(ss)
+				}
 				last = make([]byte, 0)
 			} else {
 				last = []byte(parts[len(parts)-1])
