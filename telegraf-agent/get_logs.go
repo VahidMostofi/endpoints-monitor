@@ -7,7 +7,6 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
-	"time"
 )
 
 const (
@@ -36,12 +35,12 @@ func replaceSpecialCharactersInURI(in string) string {
 func report(str string) string {
 	parts := strings.Split(str, " ")
 	lastIdx := len(parts) - 1
-	layout := time.RFC3339
-	t, err := time.Parse(layout, parts[lastIdx])
-	if err != nil {
-		fmt.Errorf("error")
-	}
-	parts[lastIdx] = strconv.FormatInt(t.UnixNano(), 10)
+	// layout := time.RFC3339
+	// t, err := time.Parse(layout, parts[lastIdx])
+	// if err != nil {
+	// 	fmt.Errorf("error")
+	// }
+	parts[lastIdx] = strings.ReplaceAll(parts[lastIdx], ".", "") + "000000"
 	res := strings.Join(parts, " ")
 	if len(res) < 22 {
 		return ""
