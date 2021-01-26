@@ -14,6 +14,25 @@ const (
 	namespace = "nginx_request"
 )
 
+func replaceSpecialCharactersInURI(in string) string {
+	if strings.Contains(in, "uri=\"") {
+		first := strings.Index(in, "uri=\"") + len("uri=\"")
+		last := strings.Index(in, "\",method=") // TODO this is very bad!!
+
+		toChange := in[first:last]
+		new := ""
+		for _, char := range toChange {
+			if char == '=' {
+				new += "\\="
+			} else {
+				new += string(char)
+			}
+		}
+		in = strings.Replace(in, toChange, new, 1)
+	}
+	return in
+}
+
 func report(str string) string {
 	parts := strings.Split(str, " ")
 	lastIdx := len(parts) - 1
@@ -27,7 +46,7 @@ func report(str string) string {
 	if len(res) < 22 {
 		return ""
 	}
-	return res
+	return replaceSpecialCharactersInURI(res)
 }
 
 func main() {
