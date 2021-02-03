@@ -49,7 +49,7 @@ func report(str string) string {
 }
 
 func main() {
-	pattern := `<[0-9]*>[A-Z][a-z]* [0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9] ([a-z]*): `
+	pattern := `<[0-9]*>[A-Z][a-z]*[ ]*[0-9]* [0-9]*:[0-9]*:[0-9]* ([a-z]*): `
 	re := regexp.MustCompile(pattern)
 	port, err := strconv.Atoi(os.Getenv("SYSLOG_SERVER_PORT"))
 	p := make([]byte, 2048)
